@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PRM1</string>
+    <string name="save">zapisz</string>
+    <string name="add">dodaj</string>
+    <string name="ilosc">Ilość</string>
+    <string name="nazwa_produktu">Nazwa produktu</string>
+    <string name="nazwa">Nazwa</string>
+    <string name="produkty_spo_ywcze">Produkty spożywcze</string>
+    <string name="leki">Leki</string>
+    <string name="kosmetyki">Kosmetyki</string>
+    <string name="kategoria">Kategoria</string>
+    <string name="data_waznosci">Data Ważności</string>
+    <string name="_0">0</string>
+
+</resources>

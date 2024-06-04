@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.prm1.viewmodel.ListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="fragments.ListFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:longClickable="false"
+            android:saveEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_product" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:importantForAccessibility="no"
+            android:onClick="@{() -> viewModel.onAddDish()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_add" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sortState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toTopOf="@+id/sort"
+            app:layout_constraintEnd_toEndOf="@+id/sort"
+            app:layout_constraintStart_toStartOf="@+id/sort"
+            app:srcCompat="@drawable/ic_sortstate_foreground" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_sort_foreground" />
+
+        <EditText
+            android:id="@+id/itemCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@android:color/holo_purple"
+            android:backgroundTint="?attr/colorPrimaryInverse"
+            android:backgroundTintMode="src_in"
+            android:clickable="false"
+            android:editable="false"
+            android:elevation="10dp"
+            android:focusable="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:text='@{String.valueOf(viewModel.count)}'
+            android:textColor="#263238"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/add"
+            app:layout_constraintEnd_toStartOf="@+id/add"
+            app:layout_constraintStart_toEndOf="@+id/sort"
+            app:layout_constraintTop_toTopOf="@+id/add"
+            tools:ignore="Deprecated,LabelFor"
+            tools:text="10" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:importantForAccessibility="no"
+            android:onClick="@{() -> viewModel.resetFilter()}"
+            app:layout_constraintBottom_toTopOf="@+id/sortState"
+            app:layout_constraintEnd_toEndOf="@+id/sortState"
+            app:layout_constraintStart_toStartOf="@+id/sortState"
+            app:srcCompat="@drawable/ic_reset_foreground" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
