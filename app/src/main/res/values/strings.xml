@@ -11,5 +11,8 @@
     <string name="kategoria">Kategoria</string>
     <string name="data_waznosci">Data Ważności</string>
     <string name="_0">0</string>
+    <string name="black">black</string>
+    <string name="white">white</string>
+    <string name="green">green</string>
 
 </resources>
