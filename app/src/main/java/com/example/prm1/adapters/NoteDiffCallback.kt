@@ -1,11 +1,12 @@
 package com.example.prm1.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.prm1.model.Product
+import com.example.prm1.model.Note
+import com.example.prm1.model.db.NoteEntity
 
-class ProductDiffCallback(
-    private val old: List<Product>,
-    private val new: List<Product>
+class NoteDiffCallback(
+    private val old: List<Note>,
+    private val new: List<Note>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = old.size
 

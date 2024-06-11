@@ -1,6 +1,6 @@
 package com.example.prm1.model
 
-data class Settings (
+data class Settings(
     val color: Int,
     val size: Float
 )

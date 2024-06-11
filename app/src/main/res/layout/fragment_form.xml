@@ -15,16 +15,14 @@
         android:layout_height="match_parent"
         tools:context=".fragments.FormFragment">
 
-
         <TextView
-            android:id="@+id/label_count"
+            android:id="@+id/label_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/ilosc"
-            app:layout_constraintEnd_toEndOf="@+id/field_name"
-            app:layout_constraintStart_toStartOf="@+id/field_name"
-            app:layout_constraintTop_toBottomOf="@+id/field_name" />
+            android:layout_marginTop="32dp"
+            android:text="@string/notatka"
+            app:layout_constraintStart_toStartOf="@+id/label_name"
+            app:layout_constraintTop_toBottomOf="@+id/picture" />
 
         <EditText
             android:id="@+id/field_name"
@@ -34,34 +32,19 @@
             android:layout_marginEnd="16dp"
             android:autofillHints=""
             android:ems="10"
-            android:hint="@string/nazwa_produktu"
+            android:hint="@string/tytul"
             android:inputType="text"
+            android:minHeight="48dp"
             android:text="@={viewModel.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/label_name"
             app:layout_constraintTop_toBottomOf="@+id/label_name" />
 
-
-        <DatePicker
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:day="@={viewModel.selectedDay}"
-            android:month="@={viewModel.selectedMonth}"
-            android:year="@={viewModel.selectedYear}"
-            app:layout_constraintBottom_toTopOf="@+id/label_cat"
-            app:layout_constraintEnd_toEndOf="@+id/label_cat"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="@+id/label_cat" />
-
         <TextView
             android:id="@+id/label_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="16dp"
             android:text="@string/nazwa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -84,74 +67,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.1" />
 
-        <RadioGroup
-            android:id="@+id/category"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/picture"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> viewModel.onAddPicture()}"
+            android:text="@string/zdj_cie"
+            app:layout_constraintStart_toStartOf="@+id/field_name"
+            app:layout_constraintTop_toBottomOf="@+id/field_name" />
 
-
-            <RadioButton
-                android:id="@+id/food"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> viewModel.setSelectedCategory(`Produkty spożywcze`)}"
-                android:text="@string/produkty_spo_ywcze" />
-
-
-            <RadioButton
-                android:id="@+id/meds"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> viewModel.setSelectedCategory(`Leki`)}"
-                android:text="@string/leki" />
-
-            <RadioButton
-                android:id="@+id/cosm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> viewModel.setSelectedCategory(`Kosmetyki`)}"
-                android:text="@string/kosmetyki" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/label_cat"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/recordButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/kategoria"
-            app:layout_constraintBottom_toTopOf="@+id/category"
-            app:layout_constraintEnd_toEndOf="@+id/category"
-            app:layout_constraintStart_toStartOf="@+id/category" />
+            android:layout_marginTop="24dp"
+            android:text="@string/nagraj"
+            app:layout_constraintEnd_toStartOf="@+id/playButton"
+            app:layout_constraintStart_toEndOf="@+id/picture"
+            app:layout_constraintTop_toBottomOf="@+id/field_name" />
 
-        <TextView
-            android:id="@+id/label_date"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/data_waznosci"
-            app:layout_constraintBottom_toTopOf="@+id/date"
-            app:layout_constraintEnd_toEndOf="@+id/date"
-            app:layout_constraintStart_toStartOf="@+id/date" />
+            android:text="@string/stop"
+            app:layout_constraintEnd_toEndOf="@+id/playButton"
+            app:layout_constraintStart_toStartOf="@+id/playButton"
+            app:layout_constraintTop_toBottomOf="@+id/playButton" />
 
-        <EditText
-            android:id="@+id/field_count"
+        <Button
+            android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="@string/_0"
-            android:inputType="number"
-            android:text="@={viewModel.count}"
+            android:text="@string/play"
             app:layout_constraintEnd_toEndOf="@+id/field_name"
-            app:layout_constraintStart_toStartOf="@+id/field_name"
-            app:layout_constraintTop_toBottomOf="@+id/label_count"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@+id/field_name" />
+
+        <EditText
+            android:id="@+id/field_note"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:text="@={viewModel.note}"
+            app:layout_constraintEnd_toEndOf="@+id/field_name"
+            app:layout_constraintStart_toStartOf="@+id/label_name"
+            app:layout_constraintTop_toBottomOf="@+id/label_note" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/todo"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/field_note"
+            app:layout_constraintStart_toStartOf="@+id/field_note"
+            app:srcCompat="@drawable/ic_add"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

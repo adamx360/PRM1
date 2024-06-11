@@ -15,6 +15,8 @@ import com.example.prm1.model.Settings
 class PaintView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     var color: Int = Color.BLACK
     var size: Float = 30F
+    private var bitmap: Bitmap? = null
+    private var canvas: Canvas? = null
     var background: Bitmap? = null
         set(value) {
             field = value
@@ -27,6 +29,7 @@ class PaintView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         strokeCap = Paint.Cap.ROUND
         strokeJoin = Paint.Join.ROUND
     }
+
     override fun onDraw(canvas: Canvas) {
         drawBackground(canvas)
         drawPaths(canvas)
@@ -40,13 +43,18 @@ class PaintView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     private fun drawPaths(canvas: Canvas) {
-        paths.forEach{
+        paths.forEach {
             paint.apply {
                 strokeWidth = it.settings.size
                 color = it.settings.color
             }
             canvas.drawPath(it.path, paint)
         }
+    }
+
+    fun setImageBitmap(bitmap: Bitmap) {
+        this.bitmap = bitmap
+        invalidate()
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -62,6 +70,7 @@ class PaintView(context: Context, attrs: AttributeSet) : View(context, attrs) {
                     paths.add(it)
                 }
             }
+
             MotionEvent.ACTION_MOVE -> {
                 paths.last().path.lineTo(event.x, event.y)
             }
@@ -72,7 +81,7 @@ class PaintView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     fun generateBitmap(): Bitmap {
-        val bitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         drawBackground(canvas)
         drawPaths(canvas)

@@ -25,5 +25,20 @@
         <argument
             android:name="type"
             app:argType="com.example.prm1.model.FormType" />
+        <action
+            android:id="@+id/action_formFragment_to_paintFragment"
+            app:destination="@id/paintFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/paintFragment"
+        android:name="com.example.prm1.fragments.PaintFragment"
+        android:label="PaintFragment" >
+        <action
+            android:id="@+id/action_paintFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.prm1.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

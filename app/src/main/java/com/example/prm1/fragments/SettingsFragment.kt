@@ -29,7 +29,7 @@ class SettingsFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         binding.color.setOnCheckedChangeListener { _, _ -> changeSettings() }
     }
 
-    private fun idToColor(id: Int): Int = when (id){
+    private fun idToColor(id: Int): Int = when (id) {
         R.id.black -> Color.BLACK
         R.id.white -> Color.WHITE
         R.id.green -> Color.GREEN
@@ -45,7 +45,9 @@ class SettingsFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             idToColor(binding.color.checkedRadioButtonId),
             binding.seekBar.progress.toFloat()
         )
-        (parentFragmentManager.findFragmentByTag(PaintFragment::class.java.name) as? PaintFragment)?.setSettings(settings)
+        (parentFragmentManager.findFragmentByTag(PaintFragment::class.java.name) as? PaintFragment)?.setSettings(
+            settings
+        )
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {}

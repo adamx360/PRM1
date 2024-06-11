@@ -1,41 +1,62 @@
 package com.example.prm1.viewmodel
 
+import android.content.ContentResolver
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.activity.viewModels
+import androidx.lifecycle.*
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import com.example.prm1.R
-import com.example.prm1.data.ProductRepository
+import com.example.prm1.data.NoteRepository
 import com.example.prm1.data.RepositoryLocator
-import com.example.prm1.model.Product
-import com.example.prm1.model.navigation.AddProduct
+import com.example.prm1.model.Note
+import com.example.prm1.model.navigation.AddNote
 import com.example.prm1.model.navigation.Destination
-import com.example.prm1.model.navigation.EditProduct
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
-    private var productRepository: ProductRepository = RepositoryLocator.productRepository
-    val products: MutableLiveData<List<Product>> = MutableLiveData(emptyList())
+    private val repository: NoteRepository = RepositoryLocator.noteRepository
     val navigation = MutableLiveData<Destination>()
-    val count = MutableLiveData(0)
+    val notes: MutableLiveData<List<Note>> = MutableLiveData(emptyList())
 
-    fun onAddDish() {
-        navigation.value = AddProduct()
+    init {
+        this.loadNotes()
     }
 
-    fun resetFilter() {
-        loadProducts()
+    private fun loadNotes() {
+        viewModelScope.launch(Dispatchers.Main) {
+            notes.value = repository.getNoteList()
+        }
     }
 
-    fun onProductEdit(id: Int) {
-        navigation.value = EditProduct(id)
+    fun insertNote(note: Note) {
+        viewModelScope.launch {
+            repository.add(note)
+            loadNotes()
+        }
     }
 
-    fun onProductRemove(id: Int) {
-        productRepository.removeById(id)
-        val productList = productRepository.getProductList()
-        products.value = productList
-        count.postValue(productList.size)
+    fun updateNote(note: Note) {
+        viewModelScope.launch {
+            repository.set(note)
+            loadNotes()
+        }
+    }
+
+    fun onNoteRemove(id: Int) {
+        viewModelScope.launch {
+            repository.removeById(id)
+            loadNotes()
+        }
+    }
+
+    fun handleImageUri(contentResolver: ContentResolver, uri: Uri) {
+        val takeFlags: Int =
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        contentResolver.takePersistableUriPermission(uri, takeFlags)
     }
 
     fun onDestinationChange(
@@ -44,12 +65,12 @@ class ListViewModel : ViewModel() {
         arguments: Bundle?
     ) {
         if (destination.id == R.id.listFragment) {
-            loadProducts()
+            this.loadNotes()
         }
     }
 
-    private fun loadProducts() {
-        products.value = productRepository.getProductList()
-        count.value = productRepository.getSize()
+    fun onAddNote() {
+        navigation.value = AddNote()
     }
+
 }

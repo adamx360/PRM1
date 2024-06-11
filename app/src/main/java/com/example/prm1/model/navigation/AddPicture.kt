@@ -5,12 +5,11 @@ import androidx.navigation.NavController
 import com.example.prm1.R
 import com.example.prm1.model.FormType
 
-class EditProduct(val id: Int) : Destination() {
+class AddPicture : Destination() {
     override fun navigate(controller: NavController) {
         controller.navigate(
-            R.id.action_listFragment_to_formFragment,
-            bundleOf("type" to FormType.Edit(id))
+            R.id.action_formFragment_to_paintFragment,
+            bundleOf("type" to FormType.New)
         )
-
     }
 }
